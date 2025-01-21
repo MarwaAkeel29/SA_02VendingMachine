@@ -10,4 +10,32 @@ products = {
     "C02": {"name": "Cookies", "price": 4.00, "stock": 7, "flavors": ["Chocolate Chip", "Butterscotch", "Oreo-Nutella"]}
 }
 
+def display_Menu_Items():
+    print("Welcome to Bath Spa's Vending Mahine🌟!")
+    print("Choose from the following items in our vending machine:")
+    for code, item in products.items():
+        if item["stock"] > 0:
+            print(f"[{code}] {item["name"]} : £{item["price"]:.2f} ({item["stock"]} available in stock)")
+                  
+
+def Flavor_Selection(flavors):
+    print("What's your preferred flavor? Take your pick!")
+    for i, flavor in enumerate(flavors, 1):
+        print(f"[{i}] {flavor}")
+    while True:
+        try:
+            options = int(input("Choose a flavor by its number below:"))
+            if 1 <= options <= len(flavors):
+                return flavors[options - 1]    
+            else:
+                print("Oops! That’s not a valid choice. Please try again. 🙁")
+        except ValueError:
+            print("Please enter a number from the list. ⚠️")        
+
+
+
+
+
+
+
 
