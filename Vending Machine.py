@@ -1,13 +1,13 @@
 # Vending Machine Products
 products = {
-    "A01": {"name": "Tea", "price": 1.50, "stock": 8, "flavors": ["Cinnamon", "Green", "Black", "Herbal"], "ratings": []},
-    "A02": {"name": "Coffee", "price": 2.70, "stock": 10, "flavors": ["Turkish Coffee", "Macchiato", "Espresso", "Pumpkin Spice Latte", "Cappuccino"], "ratings": []},
-    "A03": {"name": "Soda", "price": 3.00, "stock": 12, "flavors": ["Cola", "Pepsi", "Powerade", "Sprite", "Vimto"], "ratings": []},
-    "B01": {"name": "Chocolate Bar", "price": 2.80, "stock": 7, "flavors": ["Dark Chocolate", "Tiramisu", "Hazelnut"], "ratings": []},
-    "B02": {"name": "Chips", "price": 2.00, "stock": 5, "flavors": ["Flamin' Hot", "Cheddar Cheese", "Spicy Barbecue"], "ratings": []},
-    "B03": {"name": "Water", "price": 1.00, "stock": 15, "flavors": ["Regular", "Mineral", "Sparkling"], "ratings": []},
-    "C01": {"name": "Pastries", "price": 5.25, "stock": 12, "flavors": ["Ferrero Delight", "Red Velvet", "White Forest"], "ratings": []},
-    "C02": {"name": "Cookies", "price": 4.00, "stock": 7, "flavors": ["Chocolate Chip", "Butterscotch", "Oreo-Nutella"], "ratings": []}
+    "A01": {"name": "Tea", "price": 1.50, "stock": 8, "flavors": ["Cinnamon", "Green", "Black", "Herbal"]},
+    "A02": {"name": "Coffee", "price": 2.70, "stock": 10, "flavors": ["Turkish Coffee", "Macchiato", "Espresso", "Pumpkin Spice Latte", "Cappuccino"]},
+    "A03": {"name": "Soda", "price": 3.00, "stock": 12, "flavors": ["Cola", "Pepsi", "Powerade", "Sprite", "Vimto"]},
+    "B01": {"name": "Chocolate Bar", "price": 2.80, "stock": 7, "flavors": ["Dark Chocolate", "Tiramisu", "Hazelnut"]},
+    "B02": {"name": "Chips", "price": 2.00, "stock": 5, "flavors": ["Flamin' Hot", "Cheddar Cheese", "Spicy Barbecue"]},
+    "B03": {"name": "Water", "price": 1.00, "stock": 15, "flavors": ["Regular", "Mineral", "Sparkling"]},
+    "C01": {"name": "Pastries", "price": 5.25, "stock": 12, "flavors": ["Ferrero Delight", "Red Velvet", "White Forest"]},
+    "C02": {"name": "Cookies", "price": 4.00, "stock": 7, "flavors": ["Chocolate Chip", "Butterscotch", "Oreo-Nutella"]}
 }
 
 def display_Menu_Items():
@@ -53,27 +53,25 @@ def Execute_Payment(price):
 
         elif payment_method == "2":
             print(f"Processing your credit card payment of £{price:.2f}... 💳") 
-            
-        attempts = 0 
-        while attempts < max_attempts:
-            password = input("Enter the credit card PIN: ").strip()
-            if password == correct_password:
-                print("Payment successful! ✅ Transaction approved!")
-                return 0 
-            else:
-                attempts += 1
-                attempts_left = max_attempts - attempts
-                print(f"🛑 Access denied, try again! You have {attempts_left} attempts left.")
-
+            attempts = 0 
+            while attempts < max_attempts:
+                password = input("Enter the credit card PIN: ").strip()
+                if password == correct_password:
+                    print("Payment successful! ✅ Transaction approved!")
+                    return 0 
+                else:
+                    attempts += 1
+                    attempts_left = max_attempts - attempts
+                    print(f"🛑 Access denied, try again! You have {attempts_left} attempts left.")
         if attempts == max_attempts:
             print("Maximum login attempts reached, the card will be blocked temporarily for security reasons❌.")
             print("You may need to contact your bank to unlock it")
             return None
         
-        else:
-            print("Invalid option! Please choose 1 for Cash or 2 for Credit Card.")
+    else:
+        print("Invalid option! Please choose 1 for Cash or 2 for Credit Card.")
 
-def collect_Feedback():
+def Collect_Feedback():
     while True:
         try:
             rating = int(input("Rate your satisfaction with the purchase process of this item (1-5). "))
@@ -84,6 +82,50 @@ def collect_Feedback():
                 print("To submit your feedback, kindly enter a number between 1 and 5")
         except ValueError:
             print("Rating should be between 1 and 5. Please re-enter your rating 🔄.") 
+
+def Vending_Machine():
+    while True:
+        display_Menu_Items()
+        code = input("Your choice awaits🥰! Enter the code or 'exit' to stop!🚀: ").strip().upper()
+
+        if code.lower() == "exit":
+            print("Enjoy your goodies🍽️! Thank you for using the BSU vending machine! 🙌🎉")
+            break
+
+        if code not in products:
+            print("⚠️ Code not recognized. Give it another shot.")
+            continue
+
+        item = products[code]
+        if item["stock"] <= 0:
+            print("That item is no longer available. Please try another option 🎯.")
+            continue
+
+        selected_flavor = None
+        if item["flavors"]:
+            selected_flavor = Flavor_Selection(item["flavors"])
+
+        change = Execute_Payment(item["price"])
+
+        item["stock"] -= 1
+
+        print(f"Dispensing {item['name']} ({selected_flavor or 'No Flavor'}). Enjoy🥳!")
+        print(f"Your change💸: £{change:.2f}" if change > 0 else "No change to return. Thank you!")
+
+        rating = Collect_Feedback()
+
+        while True:
+            another = input("\nWould you like to choose another item? (yes/no): ").strip().lower()
+            if another == "yes":
+                print("\nTaking you back to the menu... 🛒")
+                break
+            elif another == "no":
+                print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon! 🚀")
+                return
+            else:
+                print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️")
+    
+Vending_Machine()            
 
 
 
