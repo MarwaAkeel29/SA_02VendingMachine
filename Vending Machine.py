@@ -1,4 +1,6 @@
 import time
+import sys
+import itertools
 
 # Vending Machine Products
 products = {
@@ -12,7 +14,20 @@ products = {
     "C02": {"name": "Cookies", "price": 4.00, "stock": 7, "flavors": ["Chocolate Chip", "Butterscotch", "Oreo-Nutella"]}
 }
 
+def rotating_effect(message, duration=2):
+    symbols = "|/-\\"
+    end_time = time.time() + duration
+    while time.time() < end_time:
+        for symbol in symbols:
+            sys.stdout.write(f"\r{message} {symbol}")
+            sys.stdout.flush()
+            time.sleep(0.2)
+    # Clear the line and replace it with a final message
+    sys.stdout.write(f"\r{message}... Done! 🎉\n")
+    sys.stdout.flush()
+
 def display_Menu_Items():
+    rotating_effect("🔄 Initializing Vending Machine Menu")
     print("\n🌟Welcome to Bath Spa's Vending Mahine🌟!")
     time.sleep(2)
     print("Choose from the following items in our vending machine: ")
@@ -23,6 +38,7 @@ def display_Menu_Items():
                   
 
 def Flavor_Selection(flavors):
+    rotating_effect("🚀 Loading your flavor options...")
     print("\nWhat's your preferred flavor? Take your pick!")
     time.sleep(1)
     for i, flavor in enumerate(flavors, 1):
@@ -65,11 +81,13 @@ def Execute_Payment(price):
                     time.sleep(1)
         elif payment_method == "2":
             print(f"Processing your credit card payment of £{price:.2f}... 💳")
+            rotating_effect("🔄 Validating card details... Please wait")
             time.sleep(2)
             attempts = 0
             while attempts < max_attempts:
                 password = input("Enter the credit card PIN: ").strip()
                 if password == correct_password:
+                    rotating_effect("🔓 Verifying PIN...")
                     time.sleep(1)
                     print("Payment successful! ✅ Transaction approved!")
                     return 0
