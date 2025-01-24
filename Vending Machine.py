@@ -1,3 +1,5 @@
+import time
+
 # Vending Machine Products
 products = {
     "A01": {"name": "Tea", "price": 1.50, "stock": 8, "flavors": ["Cinnamon", "Green", "Black", "Herbal"]},
@@ -12,16 +14,20 @@ products = {
 
 def display_Menu_Items():
     print("\n🌟Welcome to Bath Spa's Vending Mahine🌟!")
+    time.sleep(2)
     print("Choose from the following items in our vending machine: ")
     for code, item in products.items():
         if item["stock"] > 0:
             print(f"[{code}] {item["name"]} : £{item["price"]:.2f} ({item["stock"]} available in stock)")
+            time.sleep(0.5)
                   
 
 def Flavor_Selection(flavors):
     print("\nWhat's your preferred flavor? Take your pick!")
+    time.sleep(1)
     for i, flavor in enumerate(flavors, 1):
         print(f"[{i}] {flavor}")
+        time.sleep(0.5)
     while True:
         try:
             options = int(input("Choose a flavor by entering its number:"))
@@ -29,8 +35,10 @@ def Flavor_Selection(flavors):
                 return flavors[options - 1]    
             else:
                 print("Oops! That's not a valid choice. Please try again. 🙁")
+                time.sleep(1)
         except ValueError:
-            print("Please enter a number from the list. ⚠️")        
+            print("Please enter a number from the list. ⚠️") 
+            time.sleep(1)       
 
 
 def Execute_Payment(price):
@@ -39,7 +47,9 @@ def Execute_Payment(price):
 
     while True:
         print("\nPayment Options: 1. Cash  2. Credit Card")
+        time.sleep(0.5)
         payment_method = input("Choose your payment method by entering 1 or 2: ").strip()
+        time.sleep(2)
 
         if payment_method == "1":
             while True:
@@ -47,16 +57,20 @@ def Execute_Payment(price):
                     money = float(input(f"Insert money £{price:.2f}: "))
                     if money < price:
                         print(f"Not enough cash! Just £{price - money:.2f} more and it's all yours! 🎉")
+                        time.sleep(1)
                     else:
                         return money - price
                 except ValueError:
                     print("That's not quite right. Please enter a number to continue! 🔄")
+                    time.sleep(1)
         elif payment_method == "2":
             print(f"Processing your credit card payment of £{price:.2f}... 💳")
+            time.sleep(2)
             attempts = 0
             while attempts < max_attempts:
                 password = input("Enter the credit card PIN: ").strip()
                 if password == correct_password:
+                    time.sleep(1)
                     print("Payment successful! ✅ Transaction approved!")
                     return 0
                 else:
@@ -69,18 +83,42 @@ def Execute_Payment(price):
         else:
             print("Invalid option! Please choose 1 for Cash or 2 for Credit Card.")
 
+def Dispensing_Animation(item_name):
+    print("\nDispensing your item... Please wait.")
+    time.sleep(1)
+    animation = [
+        "🟩⬜⬜⬜⬜⬜⬜⬜⬜",
+        "🟩🟩⬜⬜⬜⬜⬜⬜⬜",
+        "🟩🟩🟩⬜⬜⬜⬜⬜⬜",
+        "🟩🟩🟩🟩⬜⬜⬜⬜⬜",
+        "🟩🟩🟩🟩🟩⬜⬜⬜⬜",
+        "🟩🟩🟩🟩🟩🟩⬜⬜⬜",
+        "🟩🟩🟩🟩🟩🟩🟩⬜⬜",
+        "🟩🟩🟩🟩🟩🟩🟩🟩⬜",
+        "🟩🟩🟩🟩🟩🟩🟩🟩🟩"
+    ]
+    for frame in animation:
+        print(frame, end="\r")
+        time.sleep(0.3)
+    print(f"🎉 Enjoy your {item_name}! Foodie🎉")  
+    time.sleep(0.5)          
+
 
 def Collect_Feedback():
     while True:
         try:
             rating = int(input("\nRate your satisfaction with the purchase process of this item (1-5): "))
+            time.sleep(1)
             if 1 <= rating <= 5:
                 print(f"We appreciate your feedback! You rated this item {rating} out of 5. 🏷️")
+                time.sleep(1)
                 return rating
             else:
                 print("To submit your feedback, kindly enter a number between 1 and 5.")
+                time.sleep(1)
         except ValueError:
             print("Rating should be between 1 and 5. Please re-enter your rating 🔄.")
+            time.sleep(1)
 
 
 def Vending_Machine():
@@ -90,15 +128,18 @@ def Vending_Machine():
 
         if code.lower() == "exit":
             print("\nEnjoy your goodies🍽️! Thank you for using the BSU vending machine! 🙌🎉")
+            time.sleep(1)
             break
 
         if code not in products:
             print("⚠️ Code not recognized. Give it another shot.")
+            time.sleep(1)
             continue
 
         item = products[code]
         if item["stock"] <= 0:
             print("That item is no longer available. Please try another option 🎯.")
+            time.sleep(1)
             continue
 
         selected_flavor = None
@@ -111,16 +152,19 @@ def Vending_Machine():
 
         item["stock"] -= 1
 
-        print(f"\nDispensing {item['name']} ({selected_flavor or 'No Flavor'}). Enjoy 🥳!")
-        print(f"Your change💸: £{change:.2f}" if change > 0 else "No change to return. Thank you!")
+        Dispensing_Animation(item['name'])
+        print(f"\nYour change💸: £{change:.2f}" if change > 0 else "No change to return. Thank you!")
+        time.sleep(1)
 
         rating = Collect_Feedback()
 
         # Ask if user wants another item
         while True:
             another = input("\nWould you like to choose another item? (yes/no): ").strip().lower()
+            time.sleep(1)
             if another == "yes":
                 print("\nTaking you back to the menu... 🛒")
+                time.sleep(2)
                 break
             elif another == "no":
                 print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon! 🚀")
@@ -129,7 +173,7 @@ def Vending_Machine():
                 print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️")
 
 
-Vending_Machine()
+Vending_Machine() 
            
 
 
