@@ -97,7 +97,7 @@ def Execute_Payment(price):
                     print(f"🛑 Access denied, try again! You have {attempts_left} attempts left.")
             if attempts == max_attempts:
                 print("Maximum login attempts reached. Your card is temporarily blocked. ❌")
-                return None
+                continue
         else:
             print("Invalid option! Please choose 1 for Cash or 2 for Credit Card.")
 
