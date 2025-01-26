@@ -105,7 +105,7 @@ def Execute_Payment(price): # Function to handle payment
 
 def Dispensing_Animation(item_name):  # Animation for dispensing item
     print("\nDispensing your item... Please wait.")  # Dispensing message
-    time.sleep(1)  # Short pause
+    time.sleep(2)  # Short pause
     animation = [  # Animation frames
         "🟩⬜⬜⬜⬜⬜⬜⬜⬜", # Frame 1
         "🟩🟩⬜⬜⬜⬜⬜⬜⬜", # Frame 2
