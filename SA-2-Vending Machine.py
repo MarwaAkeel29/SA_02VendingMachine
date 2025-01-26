@@ -35,7 +35,6 @@ def display_Menu_Items(): # Function to display menu
             print(f"[{code}] {item["name"]} : £{item["price"]:.2f} ({item["stock"]} available in stock)") # Print item details
             time.sleep(0.5)  # Short pause
                   
-
 def Flavor_Selection(flavors): # Function for flavor selection
     rotating_effect("🚀 Loading your flavor options...") # Show rotating effect
     print("\nWhat's your preferred flavor? Take your pick!") # Print flavor prompt
@@ -54,7 +53,6 @@ def Flavor_Selection(flavors): # Function for flavor selection
         except ValueError:  # Handle invalid input
             print("Please enter a number from the list. ⚠️") # Invalid number message
             time.sleep(1)  # Short pause     
-
 
 def Execute_Payment(price): # Function to handle payment
     correct_password = "12345"  # Correct card PIN
@@ -79,8 +77,8 @@ def Execute_Payment(price): # Function to handle payment
                     print("That's not quite right. Please enter a number to continue! 🔄") # Error message
                     time.sleep(1) # Short pause
         elif payment_method == "2": # If Credit Card selected
-            print("\nPlease insert your card... 🚧")
-            time.sleep(2)
+            print("\nPlease insert your card... 🚧") # Get card inserted
+            time.sleep(4) # Short pause
             rotating_effect("🔄 Card detected! Validating card details... Please wait") # Show rotating effect 
             time.sleep(2) # Short pause
             attempts = 0 # Maximum attempts for PIN
@@ -125,7 +123,6 @@ def Dispensing_Animation(item_name):  # Animation for dispensing item
     print(f"🎉 Enjoy your {item_name}! Foodie🎉") # Final message 
     time.sleep(0.5)   # Short pause       
 
-
 def Collect_Feedback(): # Function to collect feedback
     while True:  # Loop for valid feedback input
         try:
@@ -141,7 +138,6 @@ def Collect_Feedback(): # Function to collect feedback
         except ValueError: # Handle invalid input
             print("Rating should be between 1 and 5. Please re-enter your rating 🔄.") # Error message
             time.sleep(1) # Short pause
-
 
 def Vending_Machine(): # Main vending machine function
     while True: # Loop for user interaction
@@ -191,10 +187,10 @@ def Vending_Machine(): # Main vending machine function
                 print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon! 🚀")  # Exit message
                 return # Exit the function
             else:  # Invalid input
-                print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️") 
+                print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️") # Invalid input message
 
 
-Vending_Machine() 
+Vending_Machine() # Start the vending machine program
            
 
 
