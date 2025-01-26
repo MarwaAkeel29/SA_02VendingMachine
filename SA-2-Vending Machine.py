@@ -184,7 +184,7 @@ def Vending_Machine(): # Main vending machine function
                 time.sleep(2)  # Short pause
                 break # Break the loop
             elif another == "no": # If no
-                print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon! 🚀")  # Exit message
+                print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon Foodie! 🚀")  # Exit message
                 return # Exit the function
             else:  # Invalid input
                 print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️") # Invalid input message
