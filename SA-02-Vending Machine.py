@@ -55,7 +55,7 @@ def Flavor_Selection(flavors): # Function for flavor selection
             time.sleep(1)  # Short pause     
 
 def Execute_Payment(price): # Function to handle payment
-    correct_password = "12345"  # Correct card PIN
+    correct_password = "12345"  # Correct card PIN, you may use this pin to execute further.
     max_attempts = 3 # Maximum attempts for PIN
 
     while True: # Loop for payment selection
