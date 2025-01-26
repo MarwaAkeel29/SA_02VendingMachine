@@ -3,6 +3,7 @@ import sys  # Import sys module
 import itertools # Import itertools module
 
 # Vending Machine Products
+# name, price, stock, flavors
 products = {
     "A01": {"name": "Tea", "price": 1.50, "stock": 8, "flavors": ["Cinnamon", "Green", "Black", "Herbal"]},  # Tea product details
     "A02": {"name": "Coffee", "price": 2.70, "stock": 10, "flavors": ["Turkish Coffee", "Macchiato", "Espresso", "Pumpkin Spice Latte", "Cappuccino"]}, # Coffee product details
