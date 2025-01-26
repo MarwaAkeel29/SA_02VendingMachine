@@ -79,7 +79,7 @@ def Execute_Payment(price): # Function to handle payment
         elif payment_method == "2": # If Credit Card selected
             print("\nPlease insert your card... 🚧") # Get card inserted
             time.sleep(4) # Short pause
-            rotating_effect("🔄 Card detected! Validating card details... Please wait") # Show rotating effect 
+            rotating_effect("🔄 Card detected! Validating card details...") # Show rotating effect 
             time.sleep(2) # Short pause
             attempts = 0 # Maximum attempts for PIN
             while attempts < max_attempts:  # If attempts are less than max
