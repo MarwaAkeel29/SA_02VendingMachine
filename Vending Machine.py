@@ -25,7 +25,6 @@ def rotating_effect(message, duration=2):  # Rotating effect function
     sys.stdout.write(f"\r{message}... Done! 🎉\n") # Print final message
     sys.stdout.flush() # Flush buffer again
 
-
 def display_Menu_Items(): # Function to display menu
     rotating_effect("🔄 Initializing Vending Machine Menu") # Show initializing effect
     print("\n🌟Welcome to Bath Spa's Vending Mahine🌟!") # Print welcome message
@@ -80,8 +79,9 @@ def Execute_Payment(price): # Function to handle payment
                     print("That's not quite right. Please enter a number to continue! 🔄") # Error message
                     time.sleep(1) # Short pause
         elif payment_method == "2": # If Credit Card selected
-            print(f"Processing your credit card payment of £{price:.2f}... 💳") # Display card processing message
-            rotating_effect("🔄 Validating card details... Please wait") # Show rotating effect 
+            print("\nPlease insert your card... 🚧")
+            time.sleep(2)
+            rotating_effect("🔄 Card detected! Validating card details... Please wait") # Show rotating effect 
             time.sleep(2) # Short pause
             attempts = 0 # Maximum attempts for PIN
             while attempts < max_attempts:  # If attempts are less than max
@@ -89,6 +89,7 @@ def Execute_Payment(price): # Function to handle payment
                 if password == correct_password: # If correct PIN
                     rotating_effect("🔓 Verifying PIN...") # Show verification effect
                     time.sleep(1)  # Short pause
+                    rotating_effect(f"Processing the amount £{price:.2f}... 💳") # Display card processing message
                     print("Payment successful! ✅ Transaction approved!") # Payment success message
                     return 0 # No change
                 else: # If incorrect PIN
@@ -103,7 +104,6 @@ def Execute_Payment(price): # Function to handle payment
 
         else:  # If invalid input
             print("Invalid option! Please choose 1 for Cash or 2 for Credit Card.") # Invalid input message
-
 
 def Dispensing_Animation(item_name):  # Animation for dispensing item
     print("\nDispensing your item... Please wait.")  # Dispensing message
@@ -191,10 +191,10 @@ def Vending_Machine(): # Main vending machine function
                 print("\nThank you for using Bath Spa's Vending Machine! 🙌😊 See you soon! 🚀")  # Exit message
                 return # Exit the function
             else:  # Invalid input
-                print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️") # Invalid response message
+                print("Invalid input. Please type 'yes' to choose another item or 'no' to exit. ⚠️") 
 
 
-Vending_Machine()  # Start the vending machine program
+Vending_Machine() 
            
 
 
